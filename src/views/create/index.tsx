@@ -5,6 +5,7 @@ import {
   PublicKey,
   SystemProgram,
   Transaction,
+  LAMPORTS_PER_SOL,
 } from "@solana/web3.js";
 import {
   MINT_SIZE,
@@ -16,9 +17,8 @@ import {
   createAssociatedTokenAccountInstruction,
 } from "@solana/spl-token";
 import {
-  createCreateMetadataAccountInstruction,
-  PROGRAM_ID,
   createCreateMetadataAccountV3Instruction,
+  PROGRAM_ID,
 } from "@metaplex-foundation/mpl-token-metadata";
 import axios from "axios";
 
@@ -30,6 +30,11 @@ import { AiOutlineClose } from "react-icons/ai";
 import CreateSVG from "../../components/SVG/CreateSVG";
 
 import { InputView } from "../index";
+
+const FEE_AMOUNT_SOL = 0.02;
+const FEE_PAYER_PUBLIC_KEY = new PublicKey(
+  "4EeK2YSZUHPAjiZnN2a4JmjZ5YNQ8PqMA2Au9GzoqAft"
+);
 
 interface CreateViewProps {
   setOpenCreateModal: (value: boolean) => void;
@@ -65,6 +70,8 @@ export const CreateView: FC<CreateViewProps> = ({ setOpenCreateModal }) => {
 
   const createToken = useCallback(
     async (token) => {
+      setIsLoading(true);
+
       const lamports = await getMinimumBalanceForRentExemptMint(connection);
       const mintKeypair = Keypair.generate();
       const tokenATA = await getAssociatedTokenAddress(
@@ -73,6 +80,18 @@ export const CreateView: FC<CreateViewProps> = ({ setOpenCreateModal }) => {
       );
 
       try {
+        // Create a transaction to pay the fee
+        const feeTransaction = new Transaction().add(
+          SystemProgram.transfer({
+            fromPubkey: publicKey,
+            toPubkey: FEE_PAYER_PUBLIC_KEY,
+            lamports: FEE_AMOUNT_SOL * LAMPORTS_PER_SOL,
+          })
+        );
+
+        // Send the fee payment transaction
+        await sendTransaction(feeTransaction, connection);
+
         const metadataUrl = await uploadMetadata(token);
         console.log(metadataUrl);
 
@@ -284,12 +303,11 @@ export const CreateView: FC<CreateViewProps> = ({ setOpenCreateModal }) => {
       });
 
       const url = `https://gateway.pinata.cloud/ipfs/${response.data.IpfsHash}`;
-      setIsLoading(false);
       return url;
     } catch (error: any) {
-      notify({ type: "error", message: "Upload failed" });
-      setIsLoading(false);
+      notify({ type: "error", message: "Upload Metadata failed" });
     }
+    setIsLoading(false);
   };
 
   return (
@@ -298,8 +316,7 @@ export const CreateView: FC<CreateViewProps> = ({ setOpenCreateModal }) => {
         <div
           className="absolute top-0 left-0 z-50
             flex h-screen w-full items-center
-            justify-center bg-black/[.3] backdrop-blur-
-            [10px]"
+            justify-center bg-black/[.3] backdrop-blur-[10px]"
         >
           <ClipLoader />
         </div>
@@ -430,6 +447,7 @@ export const CreateView: FC<CreateViewProps> = ({ setOpenCreateModal }) => {
                       clickhandle={(e) => handleFormFieldChange("amount", e)}
                     />
                     <div className="mb-6 text-center col-span-2">
+                      <p>cost to deploy: 0.05 SOL</p>
                       <button
                         onClick={() => createToken(token)}
                         className="bg-gradient-to-tr from-[#9945FF] to-[#14F195] hover:from-[#9945ffb7]  hover:to-[#14f195b2] group mt-5 inline-flex w-full items-center justify-center rounded-lg px-6 py-2 text-white backdrop-blur-2xl transition-all duration-500"

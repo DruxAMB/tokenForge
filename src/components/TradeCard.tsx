@@ -21,7 +21,6 @@ interface TradeCardProps {
 }
 
 export const TradeCard: FC<TradeCardProps> = ({ data }) => {
-  console.log("image",data.image_url);
   
   return (
     <Link href={`/${data.token_address}`} passHref>
@@ -34,10 +33,10 @@ export const TradeCard: FC<TradeCardProps> = ({ data }) => {
           priority
           width={500}
           height={500}
-          className="mb- max-w-[500px] max-h-[500px] rounded-t-xl"
+          className="max-w-[500px] max-h-[500px] rounded-t-xl"
         />
       ) : (
-        <p>No image available</p>
+        <p className="h-40 flex items-center justify-center rounded-t-xl bg-slate-700">No image found :(</p>
       )}
         </div>
         <div className="grid gap-2 bg-gradient-to-tr from-[#9945ff49] to-[#14f19531] text-white p-2 border border-white rounded-b-xl">

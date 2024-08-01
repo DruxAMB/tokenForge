@@ -72,14 +72,14 @@ export const TradeToken: FC = () => {
     }, []);
   
     if (loading) {
-      return <p className='py-20 px-3 md:p-20'>Loading...</p>;
+      return <p className="py-28 px-5 text-center font-bold text-2xl">Loading.<span className="animate-ping">...</span></p>;
     }
   
 
     return (
         <>
           
-      <div className="px-20 max-lg:px-5 mt-10">
+      <div className="max-lg:px-5 mt-10">
         <div className="flex flex-col items-center">
           <div className="flex items-center px-2 border rounded-full">
             <input

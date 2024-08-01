@@ -40,11 +40,13 @@ export const AppBar: FC<FeatureViewProps> = ({
       <header id="navbar-sticky" className="bg-slate-850 navbar">
         <div className="container">
           <nav>
-            <a href="/" className="logo">
-              <h1 className="font-bold text-3xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-tr from-[#9945FF] to-[#14F195]">
-                tokenForge
-              </h1>
-            </a>
+            <Link href={"/"}>
+              <a className="logo">
+                <h1 className="font-bold text-3xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-tr from-[#9945FF] to-[#14F195]">
+                  tokenForge
+                </h1>
+              </a>
+            </Link>
 
             <div className="ms-auto flex items-center px-2.5 lg:hidden">
               <button
@@ -77,8 +79,7 @@ export const AppBar: FC<FeatureViewProps> = ({
                 ))}
               </ul>
             </div>
-
-            <NetworkSwitcher />
+              <NetworkSwitcher />
           </nav>
         </div>
       </header>

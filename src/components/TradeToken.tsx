@@ -13,6 +13,7 @@ interface TokenData {
   name: string;
   symbol: string;
   supply: string;
+  image: string;
   description: string;
   website_link: string;
   twitter_link: string;
@@ -80,21 +81,21 @@ export const TradeToken: FC = () => {
           
       <div className="px-20 max-lg:px-5 mt-10">
         <div className="flex flex-col items-center">
-          <div className="flex items-center p-3 border rounded-full">
+          <div className="flex items-center px-2 border rounded-full">
             <input
               type="text"
               placeholder="Search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-[400px] bg-transparent text-white/80 border-none focus:border-white/25 focus:ring-transparent"
+              className="md:w-[350px] bg-transparent text-white/80 border-none focus:border-white/25 focus:ring-transparent"
             />
-            <SearchIcon className='text-white h-10' />
+            <SearchIcon className='text-white h-5' />
           </div>
         </div>
 
         {filteredData.length > 0 ? (
           <>
-            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-16 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-16 gap-5">
             {tokens.map((token) => (
           <TradeCard key={token.token_address} data={token} />
         ))}

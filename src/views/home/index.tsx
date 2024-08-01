@@ -1,6 +1,9 @@
 // };
 import { FC } from "react";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import Pepe from "../../../public/assets/images/ai/pepe.svg";
+import Shiba from "../../../public/assets/images/ai/shiba.svg";
+import ShibaCoin from "../../../public/assets/images/ai/shiba-back.svg";
 
 interface HomeViewProps {
   setOpenCreateModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -8,9 +11,9 @@ interface HomeViewProps {
 
 import pkg from "../../../package.json";
 import { TradeToken } from "components/TradeToken";
+import Image from "next/image";
 
 export const HomeView: FC<HomeViewProps> = ({ setOpenCreateModal }) => {
-  
   return (
     <section
       id="home"
@@ -22,8 +25,15 @@ export const HomeView: FC<HomeViewProps> = ({ setOpenCreateModal }) => {
             <div className="p-6">
               <div className="relative">
                 <div className="bg-primary/10 -z-1 start-0 absolute top-0 h-14 w-14 animate-[spin_10s_linear_infinite] rounded-2xl rounded-br-none rounded-tl-none"></div>
+                <div className="-z-1 right-0 absolute top-5 h-10 w-10 md:h-16 md:w-16 animate-[bounce_10s_linear_infinite]">
+                  <Image src={Pepe} alt="pepe" height={100} width={100} />
+                </div>
+                <div className="-z-1 right-10 md:right-80 absolute bottom-5 h-10 w-10 md:h-16 md:w-16 animate-[bounce_8s_linear_infinite]">
+                  <Image src={Shiba} alt="pepe" height={100} width={100} />
+                </div>
+
                 <div className="bg-primary/20 -z-1 end-0 absolute left-5 bottom-20 h-14 w-14 animate-pulse rounded-full"></div>
-                <div>
+                <div className="z-30">
                   <div className="bg-slate-800 w-fit rounded-md">
                     <span className="text-transparent bg-clip-text bg-gradient-to-tr from-[#9945FF] to-[#14F195] bg-slate-850  rounded-md px-3 py-1 text-sm font-md uppercase tracking-wider">
                       tokenForge {pkg.version}
@@ -42,7 +52,7 @@ export const HomeView: FC<HomeViewProps> = ({ setOpenCreateModal }) => {
                   <div className="new_add_css">
                     <a
                       onClick={() => setOpenCreateModal(true)}
-                      className="hover:bg-blue-hover cursor-pointer pe-4 group mt-10 inline-flex items-center justify-center gap-2 rounded-full border border-white/10 px-1 py-1 text-white transition-all duration-500"
+                      className="hover:bg-blue-hover cursor-pointer w-fit md:pe-4 group mt-10 inline-flex items-center justify-center gap-2 rounded-full border border-white/10 md:px-1 md:py-1 text-white transition-all duration-500"
                     >
                       <span className="bg-gradient-to-tr from-[#9945FF] to-[#14F195] hover:from-[#9945ffb7]  hover:to-[#14f195b2] text-white me-2 flex h-11 w-11 items-center justify-center rounded-full group-hover:bg-white/10 group-hover:text-white font-bold">
                         +
@@ -60,10 +70,10 @@ export const HomeView: FC<HomeViewProps> = ({ setOpenCreateModal }) => {
         </div>
         <div className="md:hero mx-auto my-20 p-4">
           <div className="md:hero-content flex flex-col">
-            <h1 className="text-center text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-tr from-[#9945FF] to-[#14F195]">
+            <h1 className="text-center text-2xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-tr from-[#9945FF] to-[#14F195]">
               Trade Token
             </h1>
-              <TradeToken />
+            <TradeToken />
           </div>
         </div>
       </div>

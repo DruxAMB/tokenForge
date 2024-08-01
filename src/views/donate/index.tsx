@@ -106,7 +106,7 @@ export const DonateView: FC<DonateViewProps> = ({ setOpenSendTransaction }) => {
               
               <div className="my-auto pb-6 text-center">
               <div className="flex gap-10 justify-between mb-5">
-                <h4 className="mb-4 text-2xl font-bold text-white">
+                <h4 className="mb-4 text-lg md:text-xl font-bold text-white">
                   {wallet && (
                     <p>SOL Balance: {(balance || 0).toLocaleString()}</p>
                   )}

@@ -85,7 +85,7 @@ export const TokenMetadata: FC<TokenMetadataProps> = ({
                 <div className="lg:ps-0 flex h-full flex-col p-10">
                   <div className="my-auto pb-6 text-center">
                     <div className="flex justify-between mb-5">
-                      <h4 className="lg:mt-0 text-2xl font-bold text-white">
+                      <h4 className="lg:mt-0 text-lg md:text-2xl font-bold text-white">
                         Link to your Token
                       </h4>
                       <CloseModal />

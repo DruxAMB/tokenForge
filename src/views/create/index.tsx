@@ -289,59 +289,73 @@ export const CreateView: FC<CreateViewProps> = ({ setOpenCreateModal }) => {
                 className="grid gap-10 grid-cols-1
                             lg:grid-cols-2"
               >
-                <div className="px-5">
-                  <div className="upload relative w-full overflow-hidden rounded-xl">
+                <div className="px-5 flex gap-5 lg:flex-col items-center justify-center text-xs lg:text-sm">
+                  <div className=" w-full lg:mx-auto flex justify-center items-center relative overflow-hidden rounded-xl">
                     {token.image ? (
-                      <img src={token.image} alt="token" className="w-2/5" />
+                      <img src={token.image} alt="token" className="lg:w-2/5" />
                     ) : (
-                      <label htmlFor="file" className="custum-file-upload ">
-                        <div className="icon">
+                      <label
+                        htmlFor="file"
+                        className="h-[200px] w-[300px] flex flex-col justify-between gap-[20px] cursor-pointer items-center border-2 border-[#e8e8e841] rounded-lg shadow-2xl p-6"
+                      >
+                        <div className="flex items-center justify-center text-[#e8e8e8]">
                           <CreateSVG />
                         </div>
-                        <div className="text">
-                          <span>Click to upload image</span>
+                        <div className="flex items-center justify-center">
+                          <span className="font-semibold">
+                            Click to upload image
+                          </span>
                         </div>
                         <input
                           id="file"
                           onChange={handleImageChange}
                           type="file"
+                          className="hidden"
                         />
                       </label>
                     )}
                   </div>
-                  <textarea
-                    onChange={(e) => handleFormFieldChange("description", e)}
-                    className="border-default-200 relative mt-20 lg:mt-48 block w-full rounded border-white/10 bg-transparent py-1.5 px-3 text-white/80 focus:border-white/25 focus:ring-transparent"
-                    rows={6}
-                    placeholder="Description of your token..."
-                  ></textarea>
-                  <div className="mt-5 hidden lg:block">
-                    <h1 className="text-white">
-                      Links <span className="text-slate-400">(Optional)</span>
-                    </h1>
-                    <div className="grid grid-cols-2 gap-x-2">
-                      <InputView
-                        name=""
-                        placeholder="website"
-                        clickhandle={(e) => handleFormFieldChange("website", e)}
-                      />
-                      <InputView
-                        name=""
-                        placeholder="twitter"
-                        clickhandle={(e) => handleFormFieldChange("twitter", e)}
-                      />
-                      <InputView
-                        name=""
-                        placeholder="telegram"
-                        clickhandle={(e) =>
-                          handleFormFieldChange("telegram", e)
-                        }
-                      />
-                      <InputView
-                        name=""
-                        placeholder="discord"
-                        clickhandle={(e) => handleFormFieldChange("discord", e)}
-                      />
+                  <div>
+                    <textarea
+                      onChange={(e) => handleFormFieldChange("description", e)}
+                      className="border-default-200 relative mt-10 block w-full h-20 rounded border-white/10 bg-transparent py-1.5 px-3 text-white/80 focus:border-white/25 focus:ring-transparent"
+                      rows={6}
+                      placeholder="Description of your token..."
+                    ></textarea>
+                    <div className="mt-5">
+                      <h1 className="text-white">
+                        Links <span className="text-slate-400">(Optional)</span>
+                      </h1>
+                      <div className="grid grid-cols-2 gap-x-2">
+                        <InputView
+                          name=""
+                          placeholder="website"
+                          clickhandle={(e) =>
+                            handleFormFieldChange("website", e)
+                          }
+                        />
+                        <InputView
+                          name=""
+                          placeholder="twitter"
+                          clickhandle={(e) =>
+                            handleFormFieldChange("twitter", e)
+                          }
+                        />
+                        <InputView
+                          name=""
+                          placeholder="telegram"
+                          clickhandle={(e) =>
+                            handleFormFieldChange("telegram", e)
+                          }
+                        />
+                        <InputView
+                          name=""
+                          placeholder="discord"
+                          clickhandle={(e) =>
+                            handleFormFieldChange("discord", e)
+                          }
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -363,7 +377,7 @@ export const CreateView: FC<CreateViewProps> = ({ setOpenCreateModal }) => {
                       Kindly provide the required details
                     </p>
                   </div>
-                  <div className="text-start">
+                  <div className="text-start grid grid-cols-2 lg:block gap-x-5">
                     <InputView
                       name="Name"
                       placeholder="name"
@@ -384,7 +398,7 @@ export const CreateView: FC<CreateViewProps> = ({ setOpenCreateModal }) => {
                       placeholder="amount"
                       clickhandle={(e) => handleFormFieldChange("amount", e)}
                     />
-                    <div className="mb-6 text-center">
+                    <div className="mb-6 text-center col-span-2">
                       <button
                         onClick={() => createToken(token)}
                         className="bg-gradient-to-tr from-[#9945FF] to-[#14F195] hover:from-[#9945ffb7]  hover:to-[#14f195b2] group mt-5 inline-flex w-full items-center justify-center rounded-lg px-6 py-2 text-white backdrop-blur-2xl transition-all duration-500"

@@ -48,7 +48,7 @@ const TradeDetail: FC = () => {
   }
 
   return (
-    <div className="p-4">
+    <div className="py-20 px-3 md:p-20">
       <h1 className="text-2xl font-bold">{data.name}</h1>
       <p>Symbol: {data.symbol}</p>
       <p>Supply: {data.supply}</p>

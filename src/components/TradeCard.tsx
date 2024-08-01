@@ -1,8 +1,9 @@
 "use client";
 
-import { FC } from 'react';
+import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Logo from "../../public/assets/images/ai/video-2.svg";
 
 interface TradeCardProps {
   data: {
@@ -11,6 +12,7 @@ interface TradeCardProps {
     name: string;
     symbol: string;
     supply: string;
+    image: string;
     description: string;
     website_link: string;
     twitter_link: string;
@@ -21,25 +23,31 @@ interface TradeCardProps {
 
 export const TradeCard: FC<TradeCardProps> = ({ data }) => {
   return (
-    <Link href={`/trade/${data.token_address}`} passHref>
-      <div
-        className="p-2 text-white rounded-sm hover:bg-opacity-75 cursor-pointer"
-      >
-        <div className="px-2 md:px-10">
-          <Image 
-            src="/path-to-your-image.jpg" // Replace with a valid image path
+    <Link href={`/${data.token_address}`} passHref>
+      <div className="text-white rounded-sm hover:bg-opacity-75 cursor-pointer">
+        <div className="md:px-10">
+          <Image
+            src={Logo}
             alt="card"
-            width={200}
-            height={200}
-            className="mb-2 w-full rounded-t-xl"
+            width={500}
+            height={500}
+            className="mb- max-w-[500px] max-h-[500px] rounded-t-xl"
           />
         </div>
-        <div className="grid gap-2 bg-gradient-to-tr from-[#9945FF] to-[#14F195] text-white p-2 border border-white rounded-b-xl">
+        <div className="grid gap-2 bg-gradient-to-tr from-[#9945ff49] to-[#14f19531] text-white p-2 border border-white rounded-b-xl">
           <p className="font-bold text-center text-sm md:text-lg">
             {data.name}
-            <span> : {data.symbol}:</span>
+            <span> : {data.symbol}</span>
           </p>
-          <h1 className="text-xs md:text-sm mx-auto p-1 w-fit border border-t-4 border-white">Created By {data.creator_address}</h1>
+          {data.creator_address ? (
+            <h1 className="text-xs md:text-sm mx-auto p-1 w-fit border border-t-4 border-white">
+              Created By {data.creator_address.slice(0, 6)}
+            </h1>
+          ) : (
+            <h1 className="text-xs md:text-sm mx-auto p-1 w-fit border border-t-4 border-white">
+              Created By Unknown
+            </h1>
+          )}
           <p className="text-xs md:text-sm">
             Supply: <span className="text-primary">{data.supply}</span>
           </p>

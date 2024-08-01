@@ -51,6 +51,10 @@ export const CreateView: FC<CreateViewProps> = ({ setOpenCreateModal }) => {
     amount: "",
     image: "",
     description: "",
+    website: "",
+    twitter: "",
+    telegram: "",
+    discord: "",
   });
 
   const handleFormFieldChange = (fieldName, e) => {
@@ -155,11 +159,16 @@ export const CreateView: FC<CreateViewProps> = ({ setOpenCreateModal }) => {
           name: token.name,
           symbol: token.symbol,
           decimals: token.decimals,
-          amount: token.amount,
-          image: token.image,
+          supply: token.amount,
+          image_url: token.image,
           description: token.description,
           token_address: mintKeypair.publicKey.toString(),
-          metadataUrl: metadataUrl,
+          creator_address: publicKey.toString(),
+          metadata_url: metadataUrl,
+          website_link: token.website,
+          twitter_link: token.twitter,
+          telegram_link: token.telegram,
+          discord_link: token.discord,
         };
 
         try {
@@ -226,8 +235,26 @@ export const CreateView: FC<CreateViewProps> = ({ setOpenCreateModal }) => {
 
   const uploadMetadata = async (token) => {
     setIsLoading(true);
-    const { name, symbol, description, image } = token;
-    console.log(name, symbol, description, image);
+    const {
+      name,
+      symbol,
+      description,
+      image,
+      website,
+      twitter,
+      telegram,
+      discord,
+    } = token;
+    console.log(
+      name,
+      symbol,
+      description,
+      image,
+      website,
+      twitter,
+      telegram,
+      discord
+    );
     if (!name || !symbol || !description || !image) {
       setIsLoading(false);
       return notify({ type: "error", message: "Data is Missing!" });
@@ -238,6 +265,10 @@ export const CreateView: FC<CreateViewProps> = ({ setOpenCreateModal }) => {
       symbol: symbol,
       description: description,
       image: image,
+      website: website,
+      twitter: twitter,
+      telegram: telegram,
+      discord: discord,
     });
 
     try {
@@ -246,8 +277,8 @@ export const CreateView: FC<CreateViewProps> = ({ setOpenCreateModal }) => {
         url: "https://api.pinata.cloud/pinning/pinJSONToIPFS",
         data: data,
         headers: {
-          pinata_api_key: `690a9c19304a745fda24`,
-          pinata_secret_api_key: `817595904701dfe9084f20895182c3ff11a154c8ee2931747e1fea0611ad504a`,
+          pinata_api_key: `b5d87e7b0b07bb19cdc7`,
+          pinata_secret_api_key: `c3f5b271b9d21e6b715ad89f16e2fe09c7828499aa612cc5fadf04fd57c5e9b7`,
           "Content-Type": "application/json",
         },
       });

@@ -13,7 +13,7 @@ interface TokenData {
   name: string;
   symbol: string;
   supply: string;
-  image: string;
+  image_url: string;
   description: string;
   website_link: string;
   twitter_link: string;
@@ -96,8 +96,8 @@ export const TradeToken: FC = () => {
         {filteredData.length > 0 ? (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-16 gap-5">
-            {tokens.map((token) => (
-          <TradeCard key={token.token_address} data={token} />
+            {tokens.map((token, index) => (
+          <TradeCard key={index} data={token} />
         ))}
             </div>
           </>

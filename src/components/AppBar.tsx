@@ -7,6 +7,7 @@ interface FeatureViewProps {
   setOpenTokenMetaData: (value: boolean) => void;
   setOpenContact: (value: boolean) => void;
   setOpenSendTransaction: (value: boolean) => void;
+  setOpenAirdrop: (value: boolean) => void;
   setOpenCreateModal: (value: boolean) => void;
 }
 
@@ -15,6 +16,7 @@ export const AppBar: FC<FeatureViewProps> = ({
   setOpenContact,
   setOpenSendTransaction,
   setOpenCreateModal,
+  setOpenAirdrop,
 }) => {
   const menu = [
     {
@@ -28,6 +30,10 @@ export const AppBar: FC<FeatureViewProps> = ({
     {
       name: "Donate",
       function: setOpenSendTransaction,
+    },
+    {
+      name: "Airdrop",
+      function: setOpenAirdrop,
     },
     {
       name: "Contact Us",

@@ -5,7 +5,7 @@ import { ContextProvider } from "../contexts/ContextProvider";
 import { AppBar } from "../components/AppBar";
 import { Footer } from "../components/Footer";
 import Notification from "../components/Notification";
-import { ContactView, CreateView, DonateView, TokenMetadata } from "views";
+import { AirdropView, ContactView, CreateView, DonateView, TokenMetadata } from "views";
 
 require("@solana/wallet-adapter-react-ui/styles.css");
 require("../styles/globals.css");
@@ -14,6 +14,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
   const [openCreateModal, setOpenCreateModal] = useState<boolean>(false);
   const [openTokenMetaData, setOpenTokenMetaData] = useState<boolean>(false);
   const [openContact, setOpenContact] = useState<boolean>(false);
+  const [openAirdrop, setOpenAirdrop] = useState<boolean>(false);
   const [openSendTransaction, setOpenSendTransaction] =
     useState<boolean>(false);
   return (
@@ -27,27 +28,33 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
           setOpenCreateModal={setOpenCreateModal}
           setOpenTokenMetaData={setOpenTokenMetaData}
           setOpenContact={setOpenContact}
+          setOpenAirdrop={setOpenAirdrop}
           setOpenSendTransaction={setOpenSendTransaction}
         />
 
         {openCreateModal && (
-          <div className="new_loader relative h-full   bg-slate-950">
+          <div className="new_loader relative h-full backdrop-blur-2xl">
             <CreateView setOpenCreateModal={setOpenCreateModal} />
           </div>
         )}
 
         {openTokenMetaData && (
-          <div className="new_loader relative h-full bg-slate-950">
+          <div className="new_loader relative h-full backdrop-blur-2xl">
             <TokenMetadata setOpenTokenMetaData={setOpenTokenMetaData} />
           </div>
         )}
         {openContact && (
-          <div className="new_loader relative h-full bg-slate-950">
+          <div className="new_loader relative h-full backdrop-blur-2xl">
             <ContactView setOpenContact={setOpenContact} />
           </div>
         )}
+        {openAirdrop && (
+          <div className="new_loader relative h-full backdrop-blur-2xl">
+            <AirdropView setOpenAirdrop={setOpenAirdrop} />
+          </div>
+        )}
         {openSendTransaction && (
-          <div className="new_loader relative h-full bg-slate-950">
+          <div className="new_loader relative h-full backdrop-blur-2xl">
             <DonateView setOpenSendTransaction={setOpenSendTransaction} />
           </div>
         )}

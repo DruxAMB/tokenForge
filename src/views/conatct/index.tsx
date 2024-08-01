@@ -14,9 +14,7 @@ import { InputView } from "../index";
 //
 
 interface ContactViewProps {
-
   setOpenContact: (value: boolean) => void;
-  
 }
 
 export const ContactView: FC<ContactViewProps> = ({ setOpenContact }) => {
@@ -43,69 +41,63 @@ export const ContactView: FC<ContactViewProps> = ({ setOpenContact }) => {
   );
   return (
     <>
-      <section className="flex items-center py-6 px-0 lg:h-screen lg:p-10">
+      <section className="flex items-center py-6 lg:h-screen lg:p-10">
         <div className="container">
-          <div className="bg-default-950/40 mx-auto max-w-5xl overflow-hidden rounded-2xl backdrop-blur-2xl">
-            <div>
-             
-
-              <div className="lg:ps-0 flex h-full flex-col p-10">
-                <div className="my-auto pb-6 text-center">
+          <div className="bg-default-950/40 mx-auto overflow-hidden rounded-2xl backdrop-blur-2xl">
+            <div className="lg:ps-0 flex h-full w-96 md:w-[450px] max-w-xl flex-col p-10">
+              <div className="my-auto pb-6 text-center">
                 <div className="flex justify-between mb-5">
-                      <h4 className="lg:mt-0 text-2xl font-bold text-white">
-                        Get in touch
-                      </h4>
-                      <CloseModal />
+                  <h4 className="lg:mt-0 text-lg md:text-2xl font-bold text-white">
+                    Get in touch
+                  </h4>
+                  <CloseModal />
+                </div>
+                <p className="text-default-300 mx-auto mb-5 max-w-sm"></p>
+                <div className="text-start">
+                  <form onSubmit={handleSubmit}>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="email"
+                        className="text-base/normal text-default-200 mb-2 block font-semibold"
+                      >
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        className="border-default-200 block w-full rounded border-white/10 bg-transparent py-1.5 px-3 text-white/80 focus:border-white/25 focus:ring-transparent"
+                        placeholder={"email"}
+                      />
                     </div>
-                  <p className="text-default-300 mx-auto mb-5 max-w-sm">
-                  </p>
-                  <div className="text-start">
-                    <form onSubmit={handleSubmit}>
-                      <div className="mb-4">
-                        <label
-                          htmlFor="email"
-                          className="text-base/normal text-default-200 mb-2 block font-semibold"
-                        >
-                          Email
-                        </label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          className="border-default-200 block w-full rounded border-white/10 bg-transparent py-1.5 px-3 text-white/80 focus:border-white/25 focus:ring-transparent"
-                          placeholder={"email"}
-                        />
-                      </div>
-                      <ValidationError
-                        prefix="Email"
-                        field="email"
-                        errors={state.errors}
-                      />
-                      <textarea
-                        id="message"
-                        name="message"
-                        className="border-default-200 relative  block w-full rounded border-white/10 bg-transparent py-1.5 px-3 text-white/80 focus:border-white/25 focus:ring-transparent"
-                        rows={6}
-                        placeholder="message.."
-                      ></textarea>
-                      <ValidationError
-                        prefix="Message"
-                        field="message"
-                        errors={state.errors}
-                      />
+                    <ValidationError
+                      prefix="Email"
+                      field="email"
+                      errors={state.errors}
+                    />
+                    <textarea
+                      id="message"
+                      name="message"
+                      className="border-default-200 relative  block w-full rounded border-white/10 bg-transparent py-1.5 px-3 text-white/80 focus:border-white/25 focus:ring-transparent"
+                      rows={6}
+                      placeholder="message.."
+                    ></textarea>
+                    <ValidationError
+                      prefix="Message"
+                      field="message"
+                      errors={state.errors}
+                    />
 
-                      <div className="mb-6 text-center">
-                        <button
-                          type="submit"
-                          disabled={state.submitting}
-                          className="bg-gradient-to-tr from-[#9945FF] to-[#14F195] hover:from-[#9945ffb7]  hover:to-[#14f195b2] group mt-5 inline-flex w-full items-center justify-center rounded-lg px-6 py-2 text-white backdrop-blur-2xl transition-all duration-500"
-                        >
-                          <span className="fw-bold">Send Message</span>{" "}
-                        </button>
-                        
-                      </div>
-                    </form>
-                  </div>
+                    <div className="mb-6 text-center">
+                      <button
+                        type="submit"
+                        disabled={state.submitting}
+                        className="bg-gradient-to-tr from-[#9945FF] to-[#14F195] hover:from-[#9945ffb7]  hover:to-[#14f195b2] group mt-5 inline-flex w-full items-center justify-center rounded-lg px-6 py-2 text-white backdrop-blur-2xl transition-all duration-500"
+                      >
+                        <span className="fw-bold">Send Message</span>{" "}
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>

@@ -1,6 +1,20 @@
 import { useEffect, useRef } from 'react';
 
-const TradingViewWidget = () => {
+
+interface TokenData {
+  creator_address: string;
+  token_address: string;
+  name: string;
+  symbol: string;
+  supply: string;
+  description: string;
+  website_link: string;
+  twitter_link: string;
+  telegram_link: string;
+  discord_link: string;
+}
+
+const TradingViewWidget = ({data}) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -11,7 +25,7 @@ const TradingViewWidget = () => {
       script.onload = () => {
         new (window as any).TradingView.widget({
           autosize: true,
-          symbol: 'NASDAQ:AAPL',
+          symbol: data.symbol,
           interval: 'D',
           timezone: 'Etc/UTC',
           theme: 'dark',

@@ -3,7 +3,6 @@
 import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Logo from "../../public/assets/images/ai/video-2.svg";
 
 interface TradeCardProps {
   data: {
@@ -12,7 +11,7 @@ interface TradeCardProps {
     name: string;
     symbol: string;
     supply: string;
-    image: string;
+    image_url: string;
     description: string;
     website_link: string;
     twitter_link: string;
@@ -22,17 +21,24 @@ interface TradeCardProps {
 }
 
 export const TradeCard: FC<TradeCardProps> = ({ data }) => {
+  console.log("image",data.image_url);
+  
   return (
     <Link href={`/${data.token_address}`} passHref>
       <div className="text-white rounded-sm hover:bg-opacity-75 cursor-pointer">
         <div className="md:px-10">
-          <Image
-            src={Logo}
-            alt="card"
-            width={500}
-            height={500}
-            className="mb- max-w-[500px] max-h-[500px] rounded-t-xl"
-          />
+        {data.image_url ? (
+        <Image
+          src={data.image_url}
+          alt="card"
+          priority
+          width={500}
+          height={500}
+          className="mb- max-w-[500px] max-h-[500px] rounded-t-xl"
+        />
+      ) : (
+        <p>No image available</p>
+      )}
         </div>
         <div className="grid gap-2 bg-gradient-to-tr from-[#9945ff49] to-[#14f19531] text-white p-2 border border-white rounded-b-xl">
           <p className="font-bold text-center text-sm md:text-lg">

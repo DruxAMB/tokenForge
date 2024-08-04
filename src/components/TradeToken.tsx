@@ -60,17 +60,29 @@ export const TradeToken: FC = () => {
     const [loading, setLoading] = useState(true);
   
     useEffect(() => {
-      axios.get('https://pump.truevastdata.com/api/v1/tokens')
-        .then(response => {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get('https://pump.truevastdata.com/api/v1/tokens');
           setTokens(response.data);
           setLoading(false);
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
+        } catch (error) {
+          console.error('Error fetching data:', error.message);
+          if (error.response) {
+            console.error('Response data:', error.response.data);
+            console.error('Response status:', error.response.status);
+            console.error('Response headers:', error.response.headers);
+          } else if (error.request) {
+            console.error('Request data:', error.request);
+          } else {
+            console.error('Error message:', error.message);
+          }
           setLoading(false);
-        });
-    }, []);
+        }
+      };
   
+      fetchData();
+    }, []);
+    
     if (loading) {
       return <p className="py-28 px-5 text-center font-bold text-2xl">Loading.<span className="animate-ping">...</span></p>;
     }

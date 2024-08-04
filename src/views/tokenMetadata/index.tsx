@@ -5,12 +5,12 @@ import { Metadata, PROGRAM_ID } from "@metaplex-foundation/mpl-token-metadata";
 import { AiOutlineClose } from "react-icons/ai";
 import { ClipLoader } from "react-spinners";
 import { notify } from "../../utils/notifications";
-
 import { InputView } from "../index";
 
 interface TokenMetadataProps {
   setOpenTokenMetaData: (value: boolean) => void;
 }
+
 export const TokenMetadata: FC<TokenMetadataProps> = ({
   setOpenTokenMetaData,
 }) => {
@@ -26,20 +26,27 @@ export const TokenMetadata: FC<TokenMetadataProps> = ({
       setIsLoading(true);
       try {
         const tokenMint = new PublicKey(form);
-        const metadataAccount = await connection.getAccountInfo(tokenMint);
+        const metadataPDA = PublicKey.findProgramAddressSync(
+          [
+            Buffer.from("metadata"),
+            PROGRAM_ID.toBuffer(),
+            tokenMint.toBuffer(),
+          ],
+          PROGRAM_ID
+        );
 
-        // Check if metadata account exists
+        const metadataAccount = await connection.getAccountInfo(metadataPDA[0]);
+
         if (!metadataAccount) {
           console.log("No metadata account found for this token address.");
           setIsLoading(false);
+          notify({ type: "error", message: "No metadata account found" });
           return;
         }
 
-        // Deserialize metadata account data
-        const metadata = Metadata.fromAccountInfo(metadataAccount);
+        const metadata = Metadata.deserialize(metadataAccount.data);
         const metadataData = metadata[0].data;
 
-        // Set token metadata and logo
         setTokenMetadata(metadataData);
         setLogo(metadataData.uri);
         setIsLoading(false);
@@ -47,16 +54,16 @@ export const TokenMetadata: FC<TokenMetadataProps> = ({
         setTokenAddress("");
         notify({
           type: "success",
-          message: "Successful fetch token metadata",
+          message: "Successfully fetched token metadata",
         });
-        console.log("Successful fetch token metadata");
-      } catch (error: any) {
-        console.log(error);
-        notify({ type: "error", message: "Token Metadata failed" });
+        console.log("Successfully fetched token metadata", metadataData);
+      } catch (error) {
+        console.error("Error fetching metadata:", error);
+        notify({ type: "error", message: "Failed to fetch token metadata" });
         setIsLoading(false);
       }
     },
-    [connection, tokenAddress]
+    [connection]
   );
 
   const CloseModal = () => (
@@ -97,7 +104,7 @@ export const TokenMetadata: FC<TokenMetadataProps> = ({
                       <p className="text-default-300 text-base font-medium leading-6"></p>
                       <InputView
                         name="Token Address"
-                        placeholder=" address"
+                        placeholder="address"
                         clickhandle={(e) => setTokenAddress(e.target.value)}
                       />
 
@@ -106,7 +113,7 @@ export const TokenMetadata: FC<TokenMetadataProps> = ({
                           onClick={() => getMetadata(tokenAddress)}
                           className="bg-gradient-to-tr from-[#9945FF] to-[#14F195] hover:from-[#9945ffb7]  hover:to-[#14f195b2] group mt-5 inline-flex w-full items-center justify-center rounded-lg px-6 py-2 text-white backdrop-blur-2xl transition-all duration-500"
                         >
-                          <span className="fw-bold">Get Token MetaData</span>{" "}
+                          <span className="fw-bold">Get Token MetaData</span>
                         </button>
                       </div>
                     </div>
@@ -147,7 +154,7 @@ export const TokenMetadata: FC<TokenMetadataProps> = ({
                           rel="noreferrer"
                           className="bg-gradient-to-tr from-[#9945FF] to-[#14F195] hover:from-[#9945ffb7]  hover:to-[#14f195b2] group mt-5 inline-flex w-full items-center justify-center rounded-lg px-6 py-2 text-white backdrop-blur-2xl transition-all duration-500"
                         >
-                          <span className="fw-bold">Open URI</span>{" "}
+                          <span className="fw-bold">Open URI</span>
                         </a>
                       </div>
                     </div>

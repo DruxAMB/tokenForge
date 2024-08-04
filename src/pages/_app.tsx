@@ -33,28 +33,28 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
         />
 
         {openCreateModal && (
-          <div className="new_loader relative h-full backdrop-blur-2xl">
+          <div className="new_loader relative h-full backdrop-blur-md">
             <CreateView setOpenCreateModal={setOpenCreateModal} />
           </div>
         )}
 
         {openTokenMetaData && (
-          <div className="new_loader relative h-full backdrop-blur-2xl">
+          <div className="new_loader relative h-full backdrop-blur-sm">
             <TokenMetadata setOpenTokenMetaData={setOpenTokenMetaData} />
           </div>
         )}
         {openContact && (
-          <div className="new_loader relative h-full backdrop-blur-2xl">
+          <div className="new_loader relative h-full backdrop-blur-sm">
             <ContactView setOpenContact={setOpenContact} />
           </div>
         )}
         {openAirdrop && (
-          <div className="new_loader relative h-full backdrop-blur-2xl">
+          <div className="new_loader relative h-full backdrop-blur-sm">
             <AirdropView setOpenAirdrop={setOpenAirdrop} />
           </div>
         )}
         {openSendTransaction && (
-          <div className="new_loader relative h-full backdrop-blur-2xl">
+          <div className="new_loader relative h-full backdrop-blur-sm">
             <DonateView setOpenSendTransaction={setOpenSendTransaction} />
           </div>
         )}

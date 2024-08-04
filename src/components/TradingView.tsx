@@ -31,7 +31,7 @@ const TradingViewWidget = ({data}) => {
           theme: 'dark',
           style: '3',
           locale: 'en',
-          toolbar_bg: '#1e293b',
+          toolbar_bg: '#0a1120',
           enable_publishing: false,
           allow_symbol_change: true,
           container_id: 'tradingview_123',

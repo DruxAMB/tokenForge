@@ -20,23 +20,17 @@ import {
   useNetworkConfiguration,
 } from "./NetworkConfigurationProvider";
 
+
 const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const { autoConnect } = useAutoConnect();
   const { networkConfiguration } = useNetworkConfiguration();
   const network = networkConfiguration as WalletAdapterNetwork;
   const originalEndPoint = useMemo(() => clusterApiUrl(network), [network]);
-  let endpoint;
 
-  if (network == "mainnet-beta") {
-    endpoint =
-      "https://solana-mainnet.g.alchemy.com/v2/PfPHFGmB6RcQi-yTzhfpguZIYmNvn2a-";
-  } else if (network == "devnet") {
-    endpoint = originalEndPoint;
-  } else {
-    endpoint = originalEndPoint;
-  }
-
-  console.log(network);
+  const endpoint =
+    network === "mainnet-beta"
+      ? "https://solana-mainnet.g.alchemy.com/v2/ejMKzAQZZZ5V68d9jUvpnpKECUHxs6dY"
+      : originalEndPoint;
 
   const wallets = useMemo(
     () => [
@@ -72,12 +66,10 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
 export const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
   return (
-    <>
-      <NetworkConfigurationProvider>
-        <AutoConnectProvider>
-          <WalletContextProvider>{children}</WalletContextProvider>
-        </AutoConnectProvider>
-      </NetworkConfigurationProvider>
-    </>
+    <NetworkConfigurationProvider>
+      <AutoConnectProvider>
+        <WalletContextProvider>{children}</WalletContextProvider>
+      </AutoConnectProvider>
+    </NetworkConfigurationProvider>
   );
 };

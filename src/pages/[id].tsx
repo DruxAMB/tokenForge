@@ -124,9 +124,9 @@ const TradeDetail: FC = () => {
       <div className="md:grid gap-5 md:grid-cols-7">
         <TradingViewWidget data={data} />
         <div className="col-span-2 grid gap-5">
-          <div className="grid gap-5 font-bold">
-            <h2 className="text-xl font-bold">Trade ${data.symbol}</h2>
-            <div className="">
+          <div className="grid gap-5 font-bold bg-[#1d2029db] border border-[#1e293b]">
+            <h2 className="text-xl p-2 font-bold border-b bg-[#171a21eb]">Trade ${data.symbol}</h2>
+            <div className="p-2">
               <label>
                 Buy Amount:
                 <input
@@ -138,13 +138,13 @@ const TradeDetail: FC = () => {
               </label>
               <button
                 onClick={handleBuy}
-                className="p-3 w-full bg-green-500 text-white rounded"
+                className="p-3 w-full bg-green-800 text-white rounded"
               >
                 Buy
               </button>
             </div>
 
-            <div className="">
+            <div className="p-2">
               <label>
                 Sell Amount:
                 <input

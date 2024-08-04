@@ -120,7 +120,7 @@ export const TokenMetadata: FC<TokenMetadataProps> = ({
                   </div>
                 </div>
               ) : (
-                <div className="lg:ps-0 flex h-full flex-col p-10">
+                <div className="lg:ps-0 w-96 max-w-5xl flex h-full flex-col p-10">
                   <div className="my-auto pb-6 text-center">
                     <div className="flex justify-between mb-5">
                       <h4 className="lg:mt-0 text-2xl font-bold text-white">
